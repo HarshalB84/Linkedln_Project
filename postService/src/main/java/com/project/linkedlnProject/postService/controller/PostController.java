@@ -1,0 +1,28 @@
+package com.project.linkedlnProject.postService.controller;
+
+import com.project.linkedlnProject.postService.dto.PostCreateRequestDto;
+import com.project.linkedlnProject.postService.dto.PostDto;
+import com.project.linkedlnProject.postService.repository.PostRepository;
+import com.project.linkedlnProject.postService.service.PostService;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/core")
+public class PostController {
+
+    private final PostService postService;
+
+    public ResponseEntity<PostDto> createPost(@RequestBody PostCreateRequestDto postCreateRequestDto, HttpServletRequest httpServletRequest) {
+        PostDto postDto = postService.createPost(postCreateRequestDto, 1L);
+        return new ResponseEntity<>(postDto, HttpStatus.CREATED);
+    }
+
+
+}
